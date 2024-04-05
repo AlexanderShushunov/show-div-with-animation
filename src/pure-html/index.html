@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show/Hide Div</title>
+  <style>
+      .box {
+          width: 100px;
+          height: 100px;
+          background-color: red;
+          opacity: 0;
+          transition: opacity 1s;
+      }
+
+      .visible {
+          opacity: 1;
+      }
+  </style>
+</head>
+<body>
+Div should appear with animation.
+<br>
+<button onclick="toggleDiv()">Toggle exist</button>
+
+
+<script>
+  function toggleDiv () {
+    let box = document.querySelector('.box')
+    if (box !== null) {
+      box.remove()
+    } else {
+      box = document.createElement('div')
+      document.body.appendChild(box)
+      box.classList.add('box')
+      // without requestAnimationFrame it appear without effect
+      requestAnimationFrame(() => {
+        box.classList.add('visible')
+      })
+    }
+  }
+</script>
+</body>
+</html>
