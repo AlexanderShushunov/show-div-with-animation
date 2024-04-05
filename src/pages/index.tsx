@@ -10,7 +10,7 @@ export default function Home() {
         setExist(visible)
 
         const requestId = requestAnimationFrame(() => {
-            setEnhancedVisible(visible);
+            setEnhancedVisible(visible && exist);
         });
         return () => cancelAnimationFrame(requestId);
     }, [visible, exist]);
