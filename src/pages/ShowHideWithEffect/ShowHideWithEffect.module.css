@@ -1,0 +1,11 @@
+.showHideWithEffect {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.visible {
+    opacity: 1;
+}
