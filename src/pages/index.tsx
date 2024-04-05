@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { ShowHideWithEffect } from "./ShowHideWithEffect";
 
 export default function Home() {
@@ -9,8 +10,10 @@ export default function Home() {
     useEffect(() => {
         setExist(visible)
 
-        const requestId = requestAnimationFrame(() => {
-            setEnhancedVisible(visible && exist);
+        let requestId = requestAnimationFrame(() => {
+            requestId = requestAnimationFrame(() => {
+                setEnhancedVisible(visible);
+            });
         });
         return () => cancelAnimationFrame(requestId);
     }, [visible, exist]);
