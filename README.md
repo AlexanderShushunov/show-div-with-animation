@@ -1,40 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# React CSS Animation Trigger Example
 
-## Getting Started
+This project demonstrates triggering CSS transition in React when adding elements. 
+The main challenge is that adding an element and assigning it a "visible" class within the same frame 
+prevents the animation from triggering.
 
-First, run the development server:
+## Problem
 
+CSS transition don't start if the element's "visible" class is assigned immediately upon addition,
+due to the need for a detectable state change.
+
+## Solutions
+
+### Method 1: render -> requestAnimationFrame -> class assignment
+- **Add component via state change**: Change the state to initiate a component rendering.
+- **After render schedule a class Assignment in Next Animation Frame:**: Use `useEffect` to add the "visible" class
+in the next animation frame, allowing time for the DOM to update.
+
+### Method 2: requestAnimationFrame -> requestAnimationFrame -> class assignment
+- **Add Component via State Change**: Change the state to initiate a component rendering.
+- **Delay Class Assignment**: Wait until after the next animation frame to assign the "visible" class, 
+ensuring React has updated the DOM.
+
+See commit history for the implementation of each method.
+
+Run the development server:
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
